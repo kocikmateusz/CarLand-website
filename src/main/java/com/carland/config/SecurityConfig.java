@@ -20,17 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource securityDataSource;
 
-	
-	
-	/*@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
-                .and()
-                .withUser("admin").password("password").roles("ADMIN");
-    }*/
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
@@ -63,33 +52,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .permitAll();
 			
 		
-		
-		/*http.authorizeRequests()
-		.antMatchers("/sellmycar")
-		.permitAll()
-		.and()
-		.formLogin()
-			.loginPage("/login")
-			.loginProcessingUrl("/authenticateTheUser")
-			.defaultSuccessUrl("/")
-			.permitAll();*/
-		
-		
-		
-		/*http.authorizeRequests()
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-			.loginPage("/login")
-			.loginProcessingUrl("/authenticateTheUser")
-			.permitAll();*/
-		
 	}
-	/*
-	private CsrfTokenRepository csrfTokenRepository() {
-		HttpSessionCsrfTokenRepository csrfTokenRepository = new HttpSessionCsrfTokenRepository();
-        csrfTokenRepository.setSessionAttributeName("_csrf");
-        return csrfTokenRepository;
-    }*/
-	
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 	
 	@GetMapping("/")
-	public String viewHomePage3() {
+	public String viewHomePage() {
 		return "home";
 	}
 	
@@ -34,7 +34,7 @@ public class HomeController {
            new SecurityContextLogoutHandler().logout(request, response, auth);  
         }  
          return "redirect:/";  
-     }  
+     }
 	
 	
 }

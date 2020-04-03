@@ -26,7 +26,8 @@
           <div class="dropdown-menu dropdown-menu-right bg-warning">
             <div class="px-4">
               
-              <button class="dropdown-item btn btn-success btn-block">Show profile</button>
+              
+              <a th:href="@{/profile}" class="dropdown-item btn btn-success btn-block">Show profile</a>
               
               <form th:action="@{/logout}" method="POST">
               	<input class="dropdown-item btn btn-success btn-block" type="submit" value="Log out" />

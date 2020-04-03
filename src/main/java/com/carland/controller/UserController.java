@@ -27,7 +27,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/registration")
-	public String registerUser(@ModelAttribute("employee") User theUser) {
+	public String registerUser(@ModelAttribute("user") User theUser) {
 		
 		userService.saveUser(theUser);
 		
@@ -35,8 +35,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/profile")
-	public String showProfile() {
-		
+	public String showProfile(Model theModel){
 		return "profile";
 	}
 	
