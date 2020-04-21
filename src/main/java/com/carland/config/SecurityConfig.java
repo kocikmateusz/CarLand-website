@@ -28,19 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserService userService;
 	
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		/*auth
-        .inMemoryAuthentication()
-        .withUser("user").password("{noop}pass").roles("USER")
-        .and()
-        .withUser("admin").password("{noop}pass").roles("ADMIN");
-		
-		auth.jdbcAuthentication().dataSource(securityDataSource)
-			.usersByUsernameQuery("select username,password,enabled from users where username=?")
-			.authoritiesByUsernameQuery("select username,authority from authorities where username=?");
-*/
 		auth.authenticationProvider(authenticationProvider());
 
 	}
@@ -50,11 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/", "/home", "/registration").permitAll()
-			.antMatchers("/sellmycar").hasAnyRole("USER")
+			.antMatchers("/sellmycar").hasRole("USER")
 			.anyRequest().authenticated()
         .and()
         .formLogin()
 			.loginPage("/login")
+			.successHandler(customAuthenticationSuccessHandler)
 			.permitAll()
 		.and()
 	        .logout()

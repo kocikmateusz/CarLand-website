@@ -16,9 +16,19 @@
   
     <div th:replace="fragments :: navbar"> </div>
     
+    Name: <p th:text="${session.user.name}"></p>
     
+    Telephone: 
+    <p th:text="${session.user.telephoneNumber}"></p>
     
-    Profile page.
+    City:
+    <p th:text="${session.user.city}"></p>
+    
+    Street:
+    <p th:text="${session.user.street}"></p>
+    
+    Postal Code: 
+    <p th:text="${session.user.postalCode}"></p>
 	<div th:replace="fragments :: footer"></div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

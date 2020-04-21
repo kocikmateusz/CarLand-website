@@ -33,6 +33,8 @@ public class UserController {
 		User user = userService.findByUsername(username);
 		System.out.println("Street: " + user.getStreet());
 		
+		System.out.println(user);
+		
 		theModel.addAttribute("user", user);
 		
 		return "profile";

@@ -22,7 +22,7 @@
         <a sec:authorize="!isAuthenticated()" th:href="@{/login}"class="btn btn-success mx-2">Sign in</a>
         
         <div class="dropdown" sec:authorize="isAuthenticated()">
-          <button class="btn btn-primary dropdown-toggle mx-2 my-sm-0" type="button" data-toggle="dropdown">[[${#httpServletRequest.remoteUser}]]</button>
+          <button class="btn btn-primary dropdown-toggle mx-2 my-sm-0" type="button" data-toggle="dropdown" th:text="${session.user.name}"></button>
           <div class="dropdown-menu dropdown-menu-right bg-warning">
             <div class="px-4">
               

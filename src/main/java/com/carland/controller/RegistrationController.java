@@ -1,5 +1,8 @@
 package com.carland.controller;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,7 @@ public class RegistrationController {
 	public String registerUser(
 			@Valid @ModelAttribute("crmUser") CrmUser theUser,
 			BindingResult theBindingResult, 
+			HttpServletRequest request,
 			Model theModel) {
 		
 		String username = theUser.getUsername();
@@ -46,7 +50,22 @@ public class RegistrationController {
 		}
 		userService.saveUser(theUser);
 		
+		authenticateUserAfterRegistration(theUser.getUsername(), theUser.getPassword(), request);
+		
 		return "redirect:/";
+	}
+	
+	
+	void authenticateUserAfterRegistration(String username, String password, HttpServletRequest request) {
+		try {
+			request.login(username,password);
+			User theUser = userService.findByUsername(username);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", theUser);
+			
+		} catch (ServletException e) { 
+			e.printStackTrace();
+		}
 	}
 	
 }
