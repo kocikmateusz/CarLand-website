@@ -1,6 +1,8 @@
 package com.carland.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,22 +22,19 @@ public class UserController {
 		userService = theUserService;
 	}
 	
-	@GetMapping("/registration")
-	public String showRegistrationPage(Model theModel) {
-		theModel.addAttribute("user", new User());
-		return "registration";
-	}
 	
-	@PostMapping("/registration")
-	public String registerUser(@ModelAttribute("user") User theUser) {
-		
-		userService.saveUser(theUser);
-		
-		return "redirect:/";
-	}
 	
 	@GetMapping("/profile")
 	public String showProfile(Model theModel){
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal).getUsername();
+		System.out.println(username);
+		User user = userService.findByUsername(username);
+		System.out.println("Street: " + user.getStreet());
+		
+		theModel.addAttribute("user", user);
+		
 		return "profile";
 	}
 	

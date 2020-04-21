@@ -1,14 +1,22 @@
 package com.carland.entity;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="user_details")
+@Table(name="user")
 public class User {
 
 	@Id
@@ -16,14 +24,17 @@ public class User {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="username")
+	private String username;
+	
+	@Column(name="password")
+	private String password;
 	
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="telephone")
-	private String telephone;
+	@Column(name="telephoneNumber")
+	private String telephoneNumber;
 	
 	@Column(name="city")
 	private String city;
@@ -31,25 +42,45 @@ public class User {
 	@Column(name="street")
 	private String street;
 	
+	@Column(name="postal_code")
+	private String postalCode;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_roles", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Collection<Role> roles;
+	
 	public User(){
 		
 	}
 	
-	public User(int id, String name, String telephone, String city, String street) {
-		this.id = id;
+	
+
+	public User(String username, String password, String name, String telephoneNumber, String city,
+			String street, String postalCode) {
+		this.username = username;
+		this.password = password;
 		this.name = name;
-		this.telephone = telephone;
+		this.telephoneNumber = telephoneNumber;
 		this.city = city;
 		this.street = street;
+		this.postalCode = postalCode;
 	}
 	
-	public User(String name, String telephone, String city, String street) {
-		this.id = id;
+	public User(String username, String password, String name, String telephoneNumber, String city,
+			String street, String postalCode,Collection<Role> roles) {
+		this.username = username;
+		this.password = password;
 		this.name = name;
-		this.telephone = telephone;
+		this.telephoneNumber = telephoneNumber;
 		this.city = city;
 		this.street = street;
+		this.postalCode = postalCode;
+		this.roles = roles;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -67,14 +98,6 @@ public class User {
 		this.name = name;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -90,6 +113,76 @@ public class User {
 	public void setStreet(String street) {
 		this.street = street;
 	}
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public String getTelephoneNumber() {
+		return telephoneNumber;
+	}
+
+
+
+	public void setTelephoneNumber(String telephoneNumber) {
+		this.telephoneNumber = telephoneNumber;
+	}
+
+
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name
+				+ ", telephoneNumber=" + telephoneNumber + ", city=" + city + ", street=" + street + ", postalCode="
+				+ postalCode + ", roles=" + roles + "]";
+	}
+	
 	
 	
 	

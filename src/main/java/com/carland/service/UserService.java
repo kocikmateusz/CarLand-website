@@ -2,9 +2,13 @@ package com.carland.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.carland.entity.User;
+import com.carland.user.CrmUser;
 
-public interface UserService {
+public interface UserService extends UserDetailsService{
 
-	public void saveUser(User theUser);
+	public void saveUser(CrmUser theUser);
+	public User findByUsername(String username);
 }
