@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS `carland`;
+
 CREATE DATABASE  IF NOT EXISTS `carland`;
 USE `carland`;
 
@@ -58,4 +60,70 @@ CREATE TABLE `users_roles` (
 INSERT INTO `users_roles` (user_id,role_id)
 VALUES
 (1,1);
+
+DROP TABLE IF EXISTS `type`;
+
+CREATE TABLE `type` (
+	`name` varchar(32) NOT NULL,
+    
+    PRIMARY KEY (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `make` (
+	`name` varchar(32) NOT NULL,
+    
+    PRIMARY KEY (`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `model` (
+	`name` varchar(32) NOT NULL,
+    `make` varchar(32) NOT NULL,
+    
+    PRIMARY KEY (`name`, `make`),
+    
+    CONSTRAINT `FK_MODEL_MAKE` FOREIGN KEY (`make`) 
+	REFERENCES `make` (`name`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `advert`;
+
+CREATE TABLE `advert` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+    `user` int(11) NOT NULL,
+    `title` varchar(32) NOT NULL,
+    `type` varchar(32) NOT NULL,
+    `make` varchar(32) NOT NULL,
+    `model` varchar(32) NOT NULL,
+    `price` int unsigned NOT NULL,
+    `year` year NOT NULL,
+    `mileage` int unsigned NOT NULL,
+    `fuel_type` varchar(32) NOT NULL,
+    `describtion` varchar(256),
+    `expiration_date` date NOT NULL,
+    
+	PRIMARY KEY(`id`),
+    
+    CONSTRAINT `FK_USER` FOREIGN KEY (`user`) 
+	REFERENCES `user` (`id`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION,
+    
+    CONSTRAINT `FK_TYPE` FOREIGN KEY (`type`) 
+	REFERENCES `type` (`name`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION,
+    
+    CONSTRAINT `FK_MAKE` FOREIGN KEY (`make`) 
+	REFERENCES `make` (`name`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION,
+    
+    CONSTRAINT `FK_MODEL` FOREIGN KEY (`model`) 
+	REFERENCES `model` (`name`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION
+    
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
 
