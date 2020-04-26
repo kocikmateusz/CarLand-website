@@ -1,7 +1,5 @@
 package com.carland.service;
 
-import java.util.List;
-
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.carland.entity.User;

@@ -1,7 +1,6 @@
 $(document).ready(function(){
 		$('#make').change(
 				function(){
-					alert("bbb");
 					$.getJSON("http://localhost:9090/sellmycar/models", {
 						make : $(this).val(),
 						ajax : 'true'

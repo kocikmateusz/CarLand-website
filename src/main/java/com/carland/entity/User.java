@@ -34,7 +34,7 @@ public class User {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="telephoneNumber")
+	@Column(name="telephone_number")
 	private String telephoneNumber;
 	
 	@Column(name="city")

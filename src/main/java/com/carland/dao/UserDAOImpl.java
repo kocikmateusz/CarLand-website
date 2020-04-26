@@ -1,10 +1,8 @@
 package com.carland.dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,12 +13,14 @@ import com.carland.entity.User;
 public class UserDAOImpl implements UserDAO {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	private EntityManager entityManager;
+
+	
 	
 	@Override
 	public void save(User theUser) {
 		
-		Session session = sessionFactory.getCurrentSession();
+		Session session = entityManager.unwrap(Session.class);
 		
 		session.saveOrUpdate(theUser);
 
@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User findByUsername(String username) {
 		
-		Session session = sessionFactory.getCurrentSession();
+		Session session = entityManager.unwrap(Session.class);
 		
 		Query<User> theQuery = session.createQuery("from User where username=:uName", User.class);
 		theQuery.setParameter("uName", username);

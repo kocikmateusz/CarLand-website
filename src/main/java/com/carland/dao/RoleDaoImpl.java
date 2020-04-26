@@ -3,7 +3,6 @@ package com.carland.dao;
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,12 +14,12 @@ import com.carland.entity.Role;
 public class RoleDaoImpl implements RoleDao {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	private EntityManager entityManager;
 
 	@Override
 	public Role findRoleByName(String theRoleName) {
 
-		Session currentSession = sessionFactory.getCurrentSession();
+		Session currentSession = entityManager.unwrap(Session.class);
 
 		Query<Role> theQuery = currentSession.createQuery("from Role where name=:roleName", Role.class);
 		theQuery.setParameter("roleName", theRoleName);
