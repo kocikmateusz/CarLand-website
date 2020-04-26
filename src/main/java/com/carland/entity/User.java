@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -51,6 +52,9 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
 	
+	@OneToMany(mappedBy="user")
+	private Collection<Advert> adverts;
+	
 	public User(){
 		
 	}
@@ -68,8 +72,9 @@ public class User {
 		this.postalCode = postalCode;
 	}
 	
-	public User(String username, String password, String name, String telephoneNumber, String city,
-			String street, String postalCode,Collection<Role> roles) {
+	public User(int id, String username, String password, String name, String telephoneNumber, String city,
+			String street, String postalCode, Collection<Role> roles, Collection<Advert> adverts) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -78,8 +83,8 @@ public class User {
 		this.street = street;
 		this.postalCode = postalCode;
 		this.roles = roles;
+		this.adverts = adverts;
 	}
-
 
 
 	public int getId() {
@@ -172,6 +177,17 @@ public class User {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+
+	
+	public Collection<Advert> getAdverts() {
+		return adverts;
+	}
+
+
+
+	public void setAdverts(Collection<Advert> adverts) {
+		this.adverts = adverts;
 	}
 
 

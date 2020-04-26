@@ -100,7 +100,7 @@ CREATE TABLE `advert` (
     `year` year NOT NULL,
     `mileage` int unsigned NOT NULL,
     `fuel_type` varchar(32) NOT NULL,
-    `describtion` varchar(256),
+    `description` varchar(256),
     `expiration_date` date NOT NULL,
     
 	PRIMARY KEY(`id`),
@@ -125,5 +125,44 @@ CREATE TABLE `advert` (
 
 
 
+INSERT INTO `type` VALUES
+('Hatchback'),
+('Sedan'),
+('MPV'),
+('SUV'),
+('Crossover'),
+('Coupe'),
+('Convertible');
+
+INSERT INTO `make` VALUES
+('Toyota'),
+('Honda'),
+('Chevrolet'),
+('Ford'),
+('Mercedes-Benz'),
+('Jeep'),
+('BMW'),
+('Porsche'),
+('Subaru'),
+('Nissan'),
+('Volkswagen'),
+('Lexus'),
+('Audi'),
+('Ferrari'),
+('Jaguar'),
+('Volvo'),
+('Hyundai'),
+('Mazda'),
+('Tesla'),
+('Mitsubishi');
+
+INSERT INTO `model` VALUES
+('i8','BMW'),
+('X6','BMW'),
+('i3','BMW'),
+('E36','BMW');
 
 
+USE `carland`
+
+select * from model where make='bmw'

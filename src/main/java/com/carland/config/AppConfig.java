@@ -35,8 +35,6 @@ public class AppConfig {
 			throw new RuntimeException(exc);
 		}
 		
-		System.out.println(env.getProperty("jdbc.url"));
-		
 
 		setDatabaseConnection(securityDataSource);
 		setPoolProperties(securityDataSource);
