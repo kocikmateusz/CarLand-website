@@ -1,6 +1,6 @@
 package com.carland.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,11 +48,11 @@ public class Advert {
 	@Column(name="fuel_type")
 	private String fuelType;
 	
-	@Column(name="describtion")
-	private String describtion;
+	@Column(name="description")
+	private String description;
 	
 	@Column(name="expiration_date")
-	private Date expirationDate;
+	private LocalDate expirationDate;
 	
 	
 	public Advert(){
@@ -60,7 +60,7 @@ public class Advert {
 	}
 
 	public Advert(User user, String title, String type, String make, String model, int price, short year,
-			int mileage, String fuelType, String describtion, Date expirationDate) {
+			int mileage, String fuelType, String description, LocalDate expirationDate) {
 		this.user = user;
 		this.title = title;
 		this.type = type;
@@ -70,12 +70,12 @@ public class Advert {
 		this.year = year;
 		this.mileage = mileage;
 		this.fuelType = fuelType;
-		this.describtion = describtion;
+		this.description = description;
 		this.expirationDate = expirationDate;
 	}
 	
 	public Advert(int id, User user, String title, String type, String make, String model, int price, short year,
-			int mileage, String fuelType, String describtion, Date expirationDate) {
+			int mileage, String fuelType, String description, LocalDate expirationDate) {
 		this.id = id;
 		this.user = user;
 		this.title = title;
@@ -86,7 +86,7 @@ public class Advert {
 		this.year = year;
 		this.mileage = mileage;
 		this.fuelType = fuelType;
-		this.describtion = describtion;
+		this.description = description;
 		this.expirationDate = expirationDate;
 	}
 
@@ -170,20 +170,27 @@ public class Advert {
 		this.fuelType = fuelType;
 	}
 
-	public String getDescribtion() {
-		return describtion;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescribtion(String describtion) {
-		this.describtion = describtion;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Date getExpirationDate() {
+	public LocalDate getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(LocalDate expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Advert [id=" + id + ", user=" + user + ", title=" + title + ", type=" + type + ", make=" + make
+				+ ", model=" + model + ", price=" + price + ", year=" + year + ", mileage=" + mileage + ", fuelType="
+				+ fuelType + ", describtion=" + description + ", expirationDate=" + expirationDate + "]";
 	}
 	
 	
