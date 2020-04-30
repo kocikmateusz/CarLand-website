@@ -6,7 +6,7 @@ $(document).ready(function(){
 						ajax : 'true'
 					}, function(data){
 						
-						var html = '<option disabled="disabled" selected="selected" th:value="none">Choose model</option>';
+						var html = '<option disabled="disabled" selected="selected" value="none">Choose model</option>';
 		                var len = data.length;
 		                for ( var i = 0; i < len; i++) {
 		                    html += '<option th:value="' + data[i] + '">'

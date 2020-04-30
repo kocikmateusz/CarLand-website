@@ -1,12 +1,14 @@
 package com.carland.service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.carland.dao.AdvertDao;
 import com.carland.entity.Advert;
@@ -16,11 +18,14 @@ import com.carland.entity.User;
 public class AdvertServiceImpl implements AdvertService {
 	
 	@Autowired
-	AdvertDao advertDao;
+	private AdvertDao advertDao;
+	
+	@Autowired
+	private ImageService imageService;
 	
 
 	@Override
-	public void saveAdvert(Advert advert, HttpServletRequest request) {
+	public void saveAdvert(Advert advert, HttpServletRequest request, MultipartFile[] files) {
 		
 		HttpSession session = request.getSession();
 		User theUser = (User)session.getAttribute("user");
@@ -29,6 +34,8 @@ public class AdvertServiceImpl implements AdvertService {
 		advert.setExpirationDate(LocalDate.now().plusDays(14));
 		
 		advertDao.saveAdvert(advert);
+		
+		imageService.save(files, advert);
 
 	}
 

@@ -1,6 +1,7 @@
 package com.carland.entity;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -54,6 +56,8 @@ public class Advert {
 	@Column(name="expiration_date")
 	private LocalDate expirationDate;
 	
+	@OneToMany(mappedBy="advert")
+	private Collection<Image> images;
 	
 	public Advert(){
 		
@@ -75,7 +79,7 @@ public class Advert {
 	}
 	
 	public Advert(int id, User user, String title, String type, String make, String model, int price, short year,
-			int mileage, String fuelType, String description, LocalDate expirationDate) {
+			int mileage, String fuelType, String description, LocalDate expirationDate, Collection<Image> images) {
 		this.id = id;
 		this.user = user;
 		this.title = title;
@@ -88,6 +92,7 @@ public class Advert {
 		this.fuelType = fuelType;
 		this.description = description;
 		this.expirationDate = expirationDate;
+		this.images = images;
 	}
 
 	public int getId() {
@@ -184,6 +189,14 @@ public class Advert {
 
 	public void setExpirationDate(LocalDate expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+	
+	public Collection<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(Collection<Image> images) {
+		this.images = images;
 	}
 
 	@Override

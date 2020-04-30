@@ -1,6 +1,7 @@
 package com.carland.controller;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.carland.entity.Advert;
 import com.carland.service.AdvertService;
+import com.carland.service.ImageService;
 import com.carland.service.StorageService;
 
 @RequestMapping("/sellmycar")
@@ -37,7 +38,7 @@ import com.carland.service.StorageService;
 public class NewAdvertController {
 
 	@Autowired
-	AdvertService advertService;
+	private AdvertService advertService;
 	
 	@Autowired
 	private StorageService storageService;
@@ -85,11 +86,10 @@ public class NewAdvertController {
 			HttpServletRequest request,
 			Model theModel) {
 		
-		for(MultipartFile file : files) {
-			storageService.store(file);
-		}
 		
-		advertService.saveAdvert(advert, request);
+		advertService.saveAdvert(advert, request,files);
+		
+		storageService.store(files);
 		
 		return "home";
 	}

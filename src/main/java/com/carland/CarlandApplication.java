@@ -15,13 +15,7 @@ public class CarlandApplication {
 		SpringApplication.run(CarlandApplication.class, args);
 	}
 	
-	@Bean
-	CommandLineRunner init(StorageService storageService) {
-		return (args) -> {
-			storageService.deleteAll();
-			storageService.init();
-		};
-	}
+	
 
 }
 

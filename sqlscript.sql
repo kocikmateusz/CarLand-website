@@ -123,6 +123,18 @@ CREATE TABLE `advert` (
     
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `image` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`advert` int(11) NOT NULL,
+	`name` varchar(32) NOT NULL,
+    
+    PRIMARY KEY (`id`),
+    
+    CONSTRAINT `FK_ADVERT` FOREIGN KEY (`advert`) 
+	REFERENCES `advert` (`id`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 INSERT INTO `type` VALUES
@@ -136,29 +148,25 @@ INSERT INTO `type` VALUES
 
 INSERT INTO `make` VALUES
 ('Toyota'),
-('Honda'),
-('Chevrolet'),
-('Ford'),
 ('Mercedes-Benz'),
-('Jeep'),
 ('BMW'),
-('Porsche'),
-('Subaru'),
-('Nissan'),
-('Volkswagen'),
-('Lexus'),
-('Audi'),
-('Ferrari'),
-('Jaguar'),
-('Volvo'),
-('Hyundai'),
-('Mazda'),
-('Tesla'),
-('Mitsubishi');
+('Porsche');
 
 INSERT INTO `model` VALUES
 ('i8','BMW'),
 ('X6','BMW'),
 ('i3','BMW'),
-('E36','BMW');
+('E36','BMW'),
+('Corolla','Toyota'),
+('Celica','Toyota'),
+('Prius','Toyota'),
+('Verso','Toyota'),
+('CL','Mercedes-Benz'),
+('GLS','Mercedes-Benz'),
+('Vario','Mercedes-Benz'),
+('Sprinter','Mercedes-Benz'),
+('911','Porsche'),
+('Macan','Porsche'),
+('Cayenne','Porsche'),
+('Boxter','Porsche');
 

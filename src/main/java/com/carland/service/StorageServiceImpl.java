@@ -26,7 +26,7 @@ public class StorageServiceImpl implements StorageService {
 
 	@Autowired
 	public StorageServiceImpl() {
-		this.rootLocation = Paths.get("carland-upload");
+		this.rootLocation = Paths.get("C:/Users/Mateusz/carlandupload");
 	}
 
 	@Override
@@ -101,6 +101,14 @@ public class StorageServiceImpl implements StorageService {
 		catch (IOException e) {
 			throw new StorageException("Could not initialize storage", e);
 		}
+	}
+
+	@Override
+	public void store(MultipartFile[] files) {
+		for(MultipartFile file : files) {
+			store(file);
+		}
+		
 	}
 
 }
