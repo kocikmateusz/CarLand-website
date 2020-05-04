@@ -15,8 +15,6 @@ public class UserDAOImpl implements UserDAO {
 	@Autowired
 	private EntityManager entityManager;
 
-	
-	
 	@Override
 	public void save(User theUser) {
 		

@@ -32,11 +32,7 @@ public class UserController {
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = ((UserDetails)principal).getUsername();
-		System.out.println(username);
 		User user = userService.findByUsername(username);
-		System.out.println("Street: " + user.getStreet());
-		
-		System.out.println(user);
 		
 		theModel.addAttribute("user", user);
 		
