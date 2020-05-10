@@ -2,6 +2,7 @@ package com.carland.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,6 +38,12 @@ public class AdvertServiceImpl implements AdvertService {
 		
 		imageService.save(files, advert);
 
+	}
+
+
+	@Override
+	public List<Advert> getActiveAdverts() {
+		return advertDao.getActiveAdverts();
 	}
 
 }
