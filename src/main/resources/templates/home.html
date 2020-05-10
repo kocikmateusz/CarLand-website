@@ -19,8 +19,24 @@
 	  <img th:src="@{'http://localhost:8085/uploadedimages/' + ${advert.images[0].name}}" class="card-img-top" alt="...">
 	  <div class="card-body">
 	    <h5 class="card-title" th:text="${advert.title}"></h5>
-	    <p class="card-text" th:text="'Price: ' + ${advert.price} + '$'"></p>
-	    <a href="#" class="btn btn-primary">See details</a>
+	    <div class="d-flex justify-content-around">
+	    <div class="row">
+		  	<p class="card-tex h7 small mx-3" th:text="'Make: ' + ${advert.make}"></p>
+		    <p class="card-text h7 small mx-3" th:text="'Model: ' + ${advert.model}"></p>
+		</div>
+		<div class="row">
+		  	<p class="card-text h7 small mx-3" th:text="'Year: ' + ${advert.year}"></p>
+		    <p class="card-text h7 small mx-3" th:text="'Mileage: ' + ${advert.mileage}"></p>
+		</div>
+	    </div>
+	    <div class="row">
+	    	<h4 class="card-text text-danger mx-3 mt-3" th:text="${advert.price} + '$'"></h4>
+	    </div>
+	    <div class="d-flex flex-row-reverse">
+	    	<a href="#" class="btn btn-primary">See details >></a>
+	    </div>
+	    
+	    
 	  </div>
 	</div>
 	
