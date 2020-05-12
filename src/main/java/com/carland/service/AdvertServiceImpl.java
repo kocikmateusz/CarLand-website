@@ -46,4 +46,10 @@ public class AdvertServiceImpl implements AdvertService {
 		return advertDao.getActiveAdverts();
 	}
 
+
+	@Override
+	public Advert getAdvertById(int id) {
+		return advertDao.getAdvertById(id);
+	}
+
 }

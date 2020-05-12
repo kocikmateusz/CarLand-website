@@ -12,5 +12,8 @@ public interface AdvertService {
 
 	public void saveAdvert(Advert advert, HttpServletRequest request, MultipartFile[] files);
 
+	public Advert getAdvertById(int id);
+	
+	
 	public List<Advert> getActiveAdverts();
 }

@@ -15,14 +15,17 @@
     <div th:replace="fragments :: navbar"> </div>
     
 	
-	<div class="card my-5 mx-3" style="width: 18rem;" th:each="advert: ${adverts}">
-	  <img th:src="@{'http://localhost:8085/uploadedimages/' + ${advert.images[0].name}}" class="card-img-top" alt="...">
+	<div class="card my-5 mx-3" th:href="@{/advert(id=${advert.id})}" style="width: 18rem;" th:each="advert: ${adverts}" >
+	  <a th:href="@{/advert(id=${advert.id})}" >
+	  	<img th:src="@{'http://localhost:8085/uploadedimages/' + ${advert.images[0].name}}" class="card-img-top">
+	  </a>
+	  
 	  <div class="card-body">
-	    <h5 class="card-title" th:text="${advert.title}"></h5>
+	    <h5 class="card-title" th:text="${advert.make} + ' ' + ${advert.model}"></h5>
 	    <div class="d-flex justify-content-around">
 	    <div class="row">
-		  	<p class="card-tex h7 small mx-3" th:text="'Make: ' + ${advert.make}"></p>
-		    <p class="card-text h7 small mx-3" th:text="'Model: ' + ${advert.model}"></p>
+		  	<p class="card-tex h7 small mx-3" th:text="'Type: ' + ${advert.type}"></p>
+		    <p class="card-text h7 small mx-3" th:text="'Fuel: ' + ${advert.fuelType}"></p>
 		</div>
 		<div class="row">
 		  	<p class="card-text h7 small mx-3" th:text="'Year: ' + ${advert.year}"></p>
@@ -32,13 +35,11 @@
 	    <div class="row">
 	    	<h4 class="card-text text-danger mx-3 mt-3" th:text="${advert.price} + '$'"></h4>
 	    </div>
-	    <div class="d-flex flex-row-reverse">
-	    	<a href="#" class="btn btn-primary">See details >></a>
-	    </div>
 	    
 	    
 	  </div>
-	</div>
+	  </div>
+	
 	
 	<div th:replace="fragments :: footer"></div>
 	

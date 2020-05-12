@@ -37,4 +37,14 @@ public class AdvertDaoImpl implements AdvertDao {
 		
 	}
 
+	@Override
+	public Advert getAdvertById(int id) {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Query<Advert> theQuery = session.createQuery("from Advert where id=:advertId",Advert.class);
+		theQuery.setParameter("advertId", id);
+		
+		return theQuery.getSingleResult();
+	}
+
 }

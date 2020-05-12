@@ -9,4 +9,6 @@ public interface AdvertDao {
 	public void saveAdvert(Advert advert);
 
 	public List<Advert> getActiveAdverts();
+
+	public Advert getAdvertById(int id);
 }
