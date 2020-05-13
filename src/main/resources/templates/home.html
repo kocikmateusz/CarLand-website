@@ -14,10 +14,11 @@
   <div class="bg-info">
     <div th:replace="fragments :: navbar"> </div>
     
-	
-	<div class="card my-5 mx-3" th:href="@{/advert(id=${advert.id})}" style="width: 18rem;" th:each="advert: ${adverts}" >
+    <div class="container-fluid">
+	<div class="row justify-content-around">
+	<div class="card border-info my-5 mx-3" th:href="@{/advert(id=${advert.id})}" style="width: 18rem;" th:each="advert: ${adverts}" >
 	  <a th:href="@{/advert(id=${advert.id})}" >
-	  	<img th:src="@{'http://localhost:8085/uploadedimages/' + ${advert.images[0].name}}" class="card-img-top">
+	  	<img th:src="@{'http://localhost:8085/uploadedimages/' + ${advert.images[0].name}}" class="card-img-top" style="height:12rem;">
 	  </a>
 	  
 	  <div class="card-body">
@@ -35,11 +36,11 @@
 	    <div class="row">
 	    	<h4 class="card-text text-danger mx-3 mt-3" th:text="${advert.price} + '$'"></h4>
 	    </div>
-	    
+	   </div> 
 	    
 	  </div>
 	  </div>
-	
+	</div>
 	
 	<div th:replace="fragments :: footer"></div>
 	
