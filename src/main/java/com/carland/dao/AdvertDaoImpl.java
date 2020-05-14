@@ -3,6 +3,7 @@ package com.carland.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -44,6 +45,14 @@ public class AdvertDaoImpl implements AdvertDao {
 		theQuery.setParameter("advertId", id);
 		
 		return theQuery.getSingleResult();
+	}
+
+	@Override
+	@Transactional
+	public void deleteAdvert(Advert advert) {
+		Session session = entityManager.unwrap(Session.class);
+		
+		session.delete(advert);
 	}
 
 }

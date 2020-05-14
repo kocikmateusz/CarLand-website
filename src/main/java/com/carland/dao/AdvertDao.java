@@ -11,4 +11,6 @@ public interface AdvertDao {
 	public List<Advert> getActiveAdverts();
 
 	public Advert getAdvertById(int id);
+
+	public void deleteAdvert(Advert advert);
 }
