@@ -1,7 +1,6 @@
 package com.carland.service;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +32,7 @@ public class AdvertServiceImpl implements AdvertService {
 		
 		advert.setUser(theUser);
 		advert.setExpirationDate(LocalDate.now().plusDays(14));
+		advert.setState("Pending");
 		
 		advertDao.saveAdvert(advert);
 		

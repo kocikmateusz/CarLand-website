@@ -2,6 +2,7 @@ package com.carland.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.carland.dao.RoleDao;
 import com.carland.dao.UserDAO;
+import com.carland.entity.Advert;
 import com.carland.entity.Role;
 import com.carland.entity.User;
 import com.carland.user.CrmUser;
@@ -56,6 +58,12 @@ public class UserServiceImpl implements UserService {
 	public User findByUsername(String username) {
 		return userDAO.findByUsername(username);
 	}
+	
+	@Override
+	@Transactional
+	public List<Advert> getUserAdverts(User user) {
+		return userDAO.getUserAdverts(user);
+	}
 
 	@Override
 	@Transactional
@@ -71,5 +79,7 @@ public class UserServiceImpl implements UserService {
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
+
+	
 
 }

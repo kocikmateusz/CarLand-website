@@ -56,6 +56,9 @@ public class Advert {
 	@Column(name="expiration_date")
 	private LocalDate expirationDate;
 	
+	@Column(name="state")
+	private String state;
+	
 	@OneToMany(mappedBy="advert")
 	private Collection<Image> images;
 	
@@ -64,7 +67,7 @@ public class Advert {
 	}
 
 	public Advert(User user, String title, String type, String make, String model, int price, short year,
-			int mileage, String fuelType, String description, LocalDate expirationDate) {
+			int mileage, String fuelType, String description, LocalDate expirationDate, String state) {
 		this.user = user;
 		this.title = title;
 		this.type = type;
@@ -76,10 +79,11 @@ public class Advert {
 		this.fuelType = fuelType;
 		this.description = description;
 		this.expirationDate = expirationDate;
+		this.state = state;
 	}
 	
 	public Advert(int id, User user, String title, String type, String make, String model, int price, short year,
-			int mileage, String fuelType, String description, LocalDate expirationDate, Collection<Image> images) {
+			int mileage, String fuelType, String description, LocalDate expirationDate, String state, Collection<Image> images) {
 		this.id = id;
 		this.user = user;
 		this.title = title;
@@ -92,6 +96,7 @@ public class Advert {
 		this.fuelType = fuelType;
 		this.description = description;
 		this.expirationDate = expirationDate;
+		this.state = state;
 		this.images = images;
 	}
 
@@ -197,6 +202,15 @@ public class Advert {
 
 	public void setImages(Collection<Image> images) {
 		this.images = images;
+	}
+	
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	@Override

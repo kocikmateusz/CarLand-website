@@ -13,23 +13,50 @@
     <title>CarLand</title>
   </head>
   <body>
-  
+  <div class="bg-info" >
     <div th:replace="fragments :: navbar"> </div>
+    	
+    	<div class="container p-5" style="height: auto;">
+    		
+    		<h4>Details</h4>
+    		<p th:text="${session.user.name}" id="name"></p>
     
-    Name: <p th:text="${session.user.name}"></p>
+		    <p th:text="${session.user.telephoneNumber}" id="telephoneNumber"></p>
+		    
+		    <p th:text="${session.user.city}" id="city"></p>
+		    
+		    <p th:text="${session.user.street}" id="street"></p>
+		    
+		    <p th:text="${session.user.postalCode}" id="postalCode"></p>
+		    
+		    <h4>Adverts</h4>
+		    <table class="table table-dark">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">Id</th>
+			      <th scope="col">Title</th>
+			      <th scope="col">State</th>
+			      <th scope="col">Action</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<tr th:each="advert: ${adverts}">
+			  		<th scope="row" th:text="${advert.id}"></th>
+			  		<td th:text="${advert.title}"></td>
+			  		<td th:text="${advert.state}"></td>
+			  		<td>
+			  			<button type="button" class="btn-sm btn-success">View</button>
+			  			<button type="button" class="btn-sm btn-primary">Edit</button>
+			  			<button type="button" class="btn-sm btn-danger">Delete</button>
+			  		</td>
+			  	</tr>
+			  </tbody>
+			</table>
+    	</div>
     
-    Telephone: 
-    <p th:text="${session.user.telephoneNumber}"></p>
     
-    City:
-    <p th:text="${session.user.city}"></p>
-    
-    Street:
-    <p th:text="${session.user.street}"></p>
-    
-    Postal Code: 
-    <p th:text="${session.user.postalCode}"></p>
 	<div th:replace="fragments :: footer"></div>
+	</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
