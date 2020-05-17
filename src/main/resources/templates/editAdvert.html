@@ -19,36 +19,39 @@
   	<div th:replace="fragments :: navbar"> </div>
     <div class="container">
 
-        <a th:href="@{/}" class="">
-            <i class="fas fa-arrow-left fa-2x my-5 " style="color:rgb(0, 0, 0);"></i>
+        <a th:href="@{/profile}" class="">
+            <i class="fas fa-arrow-left fa-2x my-5 " style="color:rgb(0, 0, 0);">Back to profile</i>
         </a>
 
-        <form th:action="@{/sellmycar}" th:object="${advert}" enctype="multipart/form-data" method="POST">
+        <form th:action="@{/edit}" th:object="${advert}" enctype="multipart/form-data" method="POST">
+        	<input type="hidden" id="advertId" name="advertId" th:value="${editedAdvert.id}"> 
+        
             <div class="form-group">
               <label for="title">Title</label>
-              <input type="text" class="form-control" th:id="title" th:name="title">
+              <input type="text" class="form-control" th:id="title" th:name="title" th:value="${editedAdvert.title}" th:errorclass="fieldError">
             </div>
             
                 
             <div class="form-row">
                 <div class="form-group col-sm-4">
                     <label for="make">Make</label>
-                    <select class="dropdown custom-select" required="required" name="make" id="make" th:field="*{make}">
-                    	<option th:disabled="disabled" selected="selected" value="none">Choose make</option>
-                    	<option th:each="make: ${makes}" th:text="${make}" th:value="${make}">
+                    <select class="dropdown custom-select" required="required" th:field="*{make}">
+                    	<option selected="selected" th:text="${editedAdvert.make}" th:value="${editedAdvert.make}"></option>
+                    	<option th:each="make: ${makes}" th:if="${make} != ${editedAdvert.make}" th:text="${make}" th:value="${make}">
                     </select>
                 </div>
 
 				<div class="form-group col-sm-4">
                     <label for="model">Model</label>
-                    <select class="dropdown custom-select" required="required" name="model" id="model" th:field="*{model}">
-                    
+                    <select class="dropdown custom-select" required="required" th:field="*{model}">
+                    	<option selected="selected" th:text="${editedAdvert.model}" th:value="${editedAdvert.model}"></option>
+                    	<option th:each="model: ${models}" th:if="${model} != ${editedAdvert.model}" th:text="${model}" th:value="${model}">
                     </select>
                 </div>
                 
                 <div class="form-group col-sm-4">
-	                <label for="productionYear">Year</label>
-	                <input type="text" class="form-control" id="productionYear" th:field="*{year}">
+	                <label for="year">Year</label>
+	                <input type="text" class="form-control" th:id="year" th:name="year" th:value="${editedAdvert.year}"  th:errorclass="fieldError">
                  </div>
 
 
@@ -59,15 +62,15 @@
             	<div class="form-group col-sm-4">
 	            	<label for="typeInput">Type</label>
 	            	<select class="dropdown custom-select" id="typeInput" th:field="*{type}">
-	            		<option th:disabled="disabled" selected="selected" value="none">Choose type</option>
-	            		<option th:each="type: ${types}" th:text="${type}" th:value="${type}"></option>
+	            		<option selected="selected" th:text="${editedAdvert.type}" th:value="${editedAdvert.type}"></option>
+	            		<option th:each="type: ${types}" th:if="${type} != ${editedAdvert.type}" th:text="${type}" th:value="${type}"></option>
 	            	</select>
             	</div>
             	
             	<div class="form-group col-sm-4">
                     <label for="model">Fuel Type</label>
                     <select class="dropdown custom-select" id="fuelTypeInput" th:field="*{fuelType}">
-	            		<option th:disabled="disabled" selected="selected" value="none">Choose fuel type</option>
+	            		<option selected="selected" th:text="${editedAdvert.fuelType}" th:value="${editedAdvert.fuelType}"></option>
 	            		<option th:value="Diesel">Diesel</option>
 	            		<option th:value="Electric">Electric</option>
             		</select>
@@ -75,7 +78,7 @@
             
 	            <div class="form-group col-sm-4">
 	                    <label for="mileage">Mileage</label>
-	                    <input type="text" class="form-control" id="mileage" th:field="*{mileage}">
+	                    <input type="text" class="form-control" th:id="mileage" th:name="mileage" th:value="${editedAdvert.mileage}" th:errorclass="fieldError">
 	            </div>
             	
             </div>
@@ -83,14 +86,14 @@
             <div class="form-row">
             	<div class="form-group col-sm-4">
                     <label for="from">Price</label>
-                    <input type="text" th:field="*{price}" class="form-control" id="price"  placeholder="0$">
+                    <input type="text" class="form-control" th:id="price" th:name="mileage" th:value="${editedAdvert.price}" th:errorclass="fieldError">
                 </div>
             </div>
 
 			
 			<div class="form-group">
             	<label for="description">Description</label>
-            	<textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+            	<textarea class="form-control" rows="3" th:id="description" th:name="description" th:value="${editedAdvert.description}" th:text="${editedAdvert.description}" th:errorclass="fieldError"></textarea>
           	</div>
 			
             

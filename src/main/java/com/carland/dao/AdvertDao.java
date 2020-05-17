@@ -13,4 +13,6 @@ public interface AdvertDao {
 	public Advert getAdvertById(int id);
 
 	public void deleteAdvert(Advert advert);
+
+	public Advert getOnePendingAdvert();
 }

@@ -15,7 +15,7 @@
     <div th:replace="fragments :: navbar"> </div>
     
     
-	<div class="container my-5 bg-white p-3">
+	<div class="container my-5 bg-white p-3" th:fragment="advertDetails">
 		<h4 class="display-4" th:text="${advert.title}"></h4>
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 		  <ol class="carousel-indicators">

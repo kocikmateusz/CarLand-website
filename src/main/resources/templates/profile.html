@@ -45,8 +45,8 @@
 			  		<td th:text="${advert.title}"></td>
 			  		<td th:text="${advert.state}"></td>
 			  		<td>
-			  			<a th:href="'/advert?id=' + ${advert.id}" class="btn-sm btn-success" role="button">View</a>
-			  			<button type="button" class="btn-sm btn-primary">Edit</button>
+			  			<a th:href="@{/advert(id=${advert.id})}" class="btn-sm btn-success" role="button">View</a>
+			  			<a th:href="@{/edit(id=${advert.id})}" class="btn-sm btn-primary" role="button">Edit</a>
 			  			<a th:href="@{/profile/delete(advertToDelete=${advert.id})}"  type="button" class="btn-sm btn-danger" role="button" onclick="if (!(confirm('Are you sure you want to delete this advert?'))) return false">Delete</a>
 			  		</td>
 			  	</tr>

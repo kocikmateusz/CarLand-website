@@ -31,7 +31,8 @@ public class AdvertDaoImpl implements AdvertDao {
 	public List<Advert> getActiveAdverts() {
 		Session session = entityManager.unwrap(Session.class);
 		
-		Query<Advert> theQuery = session.createQuery("from Advert", Advert.class);
+		Query<Advert> theQuery = session.createQuery("from Advert where state=:state", Advert.class);
+		theQuery.setParameter("state", "ACTIVE");
 		
 		return theQuery.getResultList();
 		
@@ -53,6 +54,16 @@ public class AdvertDaoImpl implements AdvertDao {
 		Session session = entityManager.unwrap(Session.class);
 		
 		session.delete(advert);
+	}
+
+	@Override
+	public Advert getOnePendingAdvert() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Query<Advert> theQuery = session.createQuery("from Advert where state=:state",Advert.class);
+		theQuery.setParameter("state", "PENDING");
+		
+		return theQuery.getResultList().get(0);
 	}
 
 }

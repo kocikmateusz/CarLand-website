@@ -23,9 +23,8 @@ import com.carland.entity.Advert;
 import com.carland.service.AdvertService;
 import com.carland.service.StorageService;
 
-@RequestMapping("/sellmycar")
 @Controller
-public class NewAdvertController {
+public class AdvertController {
 
 	@Autowired
 	private AdvertService advertService;
@@ -38,7 +37,7 @@ public class NewAdvertController {
 	private EntityManager entityManager;
 
 	
-	@GetMapping()
+	@GetMapping("/sellmycar")
 	public String showSellPage(Model theModel) throws IOException {
 		
 		List<String> types = getNamesFromDB("type");
@@ -55,26 +54,59 @@ public class NewAdvertController {
 		return "sellmycar";
 	}
 	
-	@PostMapping()
+	@PostMapping("/sellmycar")
 	public String saveAdvert(
 			@Valid @ModelAttribute("advert") Advert advert,
 			@RequestParam("file") MultipartFile[] files,
 			BindingResult theBindingResult, 
 			HttpServletRequest request,
 			Model theModel) {
+		advertService.saveAdvert(advert, request,files);
 		
+		storageService.store(files);
+		
+		return "redirect:/";
+	}
+	
+
+	@GetMapping("/edit")
+	public String showEditAdvert(@RequestParam("id") int id, Model theModel){
+		Advert editedAdvert = advertService.getAdvertById(id);
+		
+		List<String> types = getNamesFromDB("type");
+		List<String> makes = getNamesFromDB("make");
+		List<String> models = getModels(editedAdvert.getMake());
+		
+		theModel.addAttribute("types",types);
+		theModel.addAttribute("makes",makes);
+		theModel.addAttribute("models",models);
+		theModel.addAttribute("editedAdvert", editedAdvert);
+		theModel.addAttribute("advert",editedAdvert);
+		return "editAdvert";
+	}
+	
+	@PostMapping("/edit")
+	public String editAdvert(
+			@Valid @ModelAttribute("advert") Advert advert,
+			@RequestParam("advertId") int id,
+			@RequestParam("file") MultipartFile[] files,
+			BindingResult theBindingResult, 
+			HttpServletRequest request,
+			Model theModel){
+		
+		
+		advertService.deleteAdvert(advertService.getAdvertById(id));
 		
 		advertService.saveAdvert(advert, request,files);
 		
 		storageService.store(files);
 		
-		return "home";
+		return "redirect:/profile";
 	}
 	
 	
 	
-	
-	@GetMapping("/models")
+	@GetMapping("/sellmycar/models")
 	public @ResponseBody List<String> findAllModels(
 			@RequestParam(value="make", required=true) String make){
 		Session currentSession = entityManager.unwrap(Session.class);
@@ -97,5 +129,16 @@ public class NewAdvertController {
 	    List<String> types = query.list();
 	    
 	    return types;
+	}
+	
+	public List<String> getModels(String make){
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		String sql = "select name from model where make='" + make + "'";
+		
+		SQLQuery query = currentSession.createSQLQuery(sql);
+		List<String> models = query.list();
+		
+		return models;
 	}
 }

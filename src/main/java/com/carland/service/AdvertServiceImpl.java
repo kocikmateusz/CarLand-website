@@ -32,7 +32,7 @@ public class AdvertServiceImpl implements AdvertService {
 		
 		advert.setUser(theUser);
 		advert.setExpirationDate(LocalDate.now().plusDays(14));
-		advert.setState("Pending");
+		advert.setState("PENDING");
 		
 		advertDao.saveAdvert(advert);
 		
@@ -56,6 +56,12 @@ public class AdvertServiceImpl implements AdvertService {
 	@Override
 	public void deleteAdvert(Advert advert) {
 		advertDao.deleteAdvert(advert);
+	}
+
+
+	@Override
+	public Advert getOnePendingAdvert() {
+		return advertDao.getOnePendingAdvert();
 	}
 
 }
