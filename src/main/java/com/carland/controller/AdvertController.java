@@ -95,7 +95,7 @@ public class AdvertController {
 			Model theModel){
 		
 		
-		advertService.deleteAdvert(advertService.getAdvertById(id));
+		//advertService.deleteAdvert(advertService.getAdvertById(id));
 		
 		advertService.saveAdvert(advert, request,files);
 		

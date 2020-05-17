@@ -31,7 +31,6 @@ public class AdvertServiceImpl implements AdvertService {
 		User theUser = (User)session.getAttribute("user");
 		
 		advert.setUser(theUser);
-		advert.setExpirationDate(LocalDate.now().plusDays(14));
 		advert.setState("PENDING");
 		
 		advertDao.saveAdvert(advert);
@@ -62,6 +61,14 @@ public class AdvertServiceImpl implements AdvertService {
 	@Override
 	public Advert getOnePendingAdvert() {
 		return advertDao.getOnePendingAdvert();
+	}
+
+
+	@Override
+	public void makeAdvertActive(Advert advert) {
+		advert.setState("ACTIVE");
+		advert.setExpirationDate(LocalDate.now().plusDays(14));
+		advertDao.saveAdvert(advert);
 	}
 
 }

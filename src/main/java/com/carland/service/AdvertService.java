@@ -15,4 +15,5 @@ public interface AdvertService {
 	public List<Advert> getActiveAdverts();
 	public void deleteAdvert(Advert advert);
 	public Advert getOnePendingAdvert();
+	public void makeAdvertActive(Advert advert);
 }

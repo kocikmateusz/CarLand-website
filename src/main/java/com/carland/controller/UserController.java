@@ -34,12 +34,6 @@ public class UserController {
 	@Autowired
 	private AdvertService advertService;
 	
-	public UserController(UserService theUserService) {
-		userService = theUserService;
-	}
-	
-	
-	
 	@GetMapping("/profile")
 	public String showProfile(Model theModel){
 		

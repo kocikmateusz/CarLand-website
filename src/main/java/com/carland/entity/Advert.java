@@ -60,7 +60,7 @@ public class Advert {
 	@Column(name="state")
 	private String state;
 	
-	@OneToMany(mappedBy="advert")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="advert")
 	private Collection<Image> images;
 	
 	public Advert(){

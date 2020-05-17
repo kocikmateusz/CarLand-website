@@ -52,7 +52,7 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="user")
 	private Collection<Advert> adverts;
 	
 	public User(){

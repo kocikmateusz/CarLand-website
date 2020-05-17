@@ -20,6 +20,7 @@ public class AdvertDaoImpl implements AdvertDao {
 	private EntityManager entityManager;
 
 	@Override
+	@Transactional
 	public void saveAdvert(Advert advert) {
 		Session session = entityManager.unwrap(Session.class);
 		

@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.carland.entity.Advert;
 import com.carland.service.AdvertService;
@@ -26,4 +28,23 @@ public class AdminController {
 		
 		return "admin";
 	}
+	
+	@GetMapping("/decision")
+	public String manageAdvert(
+			@RequestParam("id") int id,
+			@RequestParam("accepted") Boolean accepted) {
+		Advert advert = advertService.getAdvertById(id);
+		System.out.println("ADVERRRRRRRRRRRRRRRRRRRRT: " + advert);
+		
+		
+		if(accepted) {
+			advertService.makeAdvertActive(advert);
+			System.out.println("zzzzzzzz");
+		}else {
+			advertService.deleteAdvert(advert);
+			System.out.println("bbbbbb");
+		}
+		return "redirect:/admin";
+	}
+	
 }
