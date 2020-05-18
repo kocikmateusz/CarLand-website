@@ -31,7 +31,12 @@ public class AdvertServiceImpl implements AdvertService {
 		User theUser = (User)session.getAttribute("user");
 		
 		advert.setUser(theUser);
-		advert.setState("PENDING");
+		
+		if(theUser.hasRole("ADMIN")) {
+			advert.setState("ACTIVE");
+		}else {
+			advert.setState("PENDING");
+		}
 		
 		advertDao.saveAdvert(advert);
 		

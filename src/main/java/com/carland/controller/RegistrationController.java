@@ -43,7 +43,7 @@ public class RegistrationController {
 		
 		if(userService.findByUsername(username) != null) {
 			theModel.addAttribute("crmUser", new CrmUser());
-			theModel.addAttribute("registrationError", "User name already exists.");
+			theModel.addAttribute("registrationError", "User with that email already exists.");
 			return "registration";
 		}
 		userService.saveUser(theUser);

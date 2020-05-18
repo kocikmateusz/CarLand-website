@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="advert")
@@ -27,6 +28,7 @@ public class Advert {
 	@JoinColumn(name="user",nullable=false)
 	private User user;
 	
+	@NotNull(message="title is required")
 	@Column(name="title")
 	private String title;
 	

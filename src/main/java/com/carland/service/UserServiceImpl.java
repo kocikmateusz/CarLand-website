@@ -44,9 +44,6 @@ public class UserServiceImpl implements UserService {
 		user.setCity(crmUser.getCity());
 		user.setStreet(crmUser.getStreet());
 		user.setPostalCode(crmUser.getPostalCode());
-		
-		System.out.println(user);
-		
 		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_USER")));
 		
 		userDAO.save(user);

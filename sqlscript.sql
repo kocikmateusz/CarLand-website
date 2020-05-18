@@ -59,6 +59,7 @@ CREATE TABLE `users_roles` (
 
 INSERT INTO `users_roles` (user_id,role_id)
 VALUES
+(1,1),
 (1,2);
 
 DROP TABLE IF EXISTS `type`;
@@ -101,7 +102,7 @@ CREATE TABLE `advert` (
     `mileage` int unsigned NOT NULL,
     `fuel_type` varchar(32) NOT NULL,
     `description` varchar(256),
-    `expiration_date` date NOT NULL,
+    `expiration_date` date,
     `state` varchar(16) NOT NULL,
     
 	PRIMARY KEY(`id`),

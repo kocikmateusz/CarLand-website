@@ -2,6 +2,7 @@ package com.carland.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -9,19 +10,23 @@ import javax.validation.Valid;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.carland.entity.Advert;
+import com.carland.entity.User;
 import com.carland.service.AdvertService;
 import com.carland.service.StorageService;
+import com.carland.service.UserService;
 
 @Controller
 public class AdvertController {
@@ -32,6 +37,8 @@ public class AdvertController {
 	@Autowired
 	private StorageService storageService;
 	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private EntityManager entityManager;
@@ -39,6 +46,10 @@ public class AdvertController {
 	
 	@GetMapping("/sellmycar")
 	public String showSellPage(Model theModel) throws IOException {
+		
+		if(checkIfUserHas10Adverts()) {
+			return "redirect:/";
+		}
 		
 		List<String> types = getNamesFromDB("type");
 		List<String> makes = getNamesFromDB("make");
@@ -48,8 +59,6 @@ public class AdvertController {
 		
 		Advert advert = new Advert();
 		theModel.addAttribute("advert",advert);
-		
-		
 		
 		return "sellmycar";
 	}
@@ -94,14 +103,25 @@ public class AdvertController {
 			HttpServletRequest request,
 			Model theModel){
 		
-		
-		//advertService.deleteAdvert(advertService.getAdvertById(id));
+		advertService.deleteAdvert(advertService.getAdvertById(id));
 		
 		advertService.saveAdvert(advert, request,files);
 		
 		storageService.store(files);
 		
 		return "redirect:/profile";
+	}
+	
+	private Boolean checkIfUserHas10Adverts() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal).getUsername();
+		User user = userService.findByUsername(username);
+		
+		if(user.getAdverts().size() >= 10) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	

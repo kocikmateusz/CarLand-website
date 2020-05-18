@@ -33,8 +33,8 @@
             <div class="form-row">
                 <div class="form-group col-sm-4">
                     <label for="make">Make</label>
-                    <select class="dropdown custom-select" required="required" name="make" id="make" th:field="*{make}">
-                    	<option th:disabled="disabled" selected="selected" value="none">Choose make</option>
+                    <select class="dropdown custom-select" required="required" name="make" id="make">
+                    	<option disabled="disabled" selected="selected" value="none">Choose make</option>
                     	<option th:each="make: ${makes}" th:text="${make}" th:value="${make}">
                     </select>
                 </div>
@@ -48,7 +48,7 @@
                 
                 <div class="form-group col-sm-4">
 	                <label for="productionYear">Year</label>
-	                <input type="text" class="form-control" id="productionYear" th:field="*{year}">
+	                <input type="text" class="form-control" id="year" name="year">
                  </div>
 
 
@@ -57,17 +57,17 @@
             
             <div class="form-row">
             	<div class="form-group col-sm-4">
-	            	<label for="typeInput">Type</label>
-	            	<select class="dropdown custom-select" id="typeInput" th:field="*{type}">
-	            		<option th:disabled="disabled" selected="selected" value="none">Choose type</option>
+	            	<label for="type">Type</label>
+	            	<select class="dropdown custom-select" id="type" name="type">
+	            		<option th:disabled="disabled" th:selected="selected" th:value="none">Choose type</option>
 	            		<option th:each="type: ${types}" th:text="${type}" th:value="${type}"></option>
 	            	</select>
             	</div>
             	
             	<div class="form-group col-sm-4">
                     <label for="model">Fuel Type</label>
-                    <select class="dropdown custom-select" id="fuelTypeInput" th:field="*{fuelType}">
-	            		<option th:disabled="disabled" selected="selected" value="none">Choose fuel type</option>
+                    <select class="dropdown custom-select" id="fuelType" name="fuelType">
+	            		<option disabled="disabled" selected="selected" value="none">Choose fuel type</option>
 	            		<option th:value="Diesel">Diesel</option>
 	            		<option th:value="Electric">Electric</option>
             		</select>
@@ -75,7 +75,7 @@
             
 	            <div class="form-group col-sm-4">
 	                    <label for="mileage">Mileage</label>
-	                    <input type="text" class="form-control" id="mileage" th:field="*{mileage}">
+	                    <input type="text" class="form-control" id="mileage" name="mileage">
 	            </div>
             	
             </div>
@@ -83,7 +83,7 @@
             <div class="form-row">
             	<div class="form-group col-sm-4">
                     <label for="from">Price</label>
-                    <input type="text" th:field="*{price}" class="form-control" id="price"  placeholder="0$">
+                    <input type="text" class="form-control" id="price"  name="price">
                 </div>
             </div>
 

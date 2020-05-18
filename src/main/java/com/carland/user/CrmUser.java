@@ -1,37 +1,39 @@
 package com.carland.user;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class CrmUser {
 
-	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@Email(message="must have email format")
+	@NotEmpty(message = "is required")
 	private String username;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotEmpty(message = "is required")
+	@Size(min = 6, message = "Password must have more than 5 chars")
 	private String password;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@Size(min=3, message = "3 or letters are required")
+	@Pattern(regexp="[a-zA-Z]+", message="Name must contain only letters")
 	private String name;
 	
-	@NotNull(message = "is required")
-	@Size(min = 9, max=9, message = "must count 9 digits")
+	@NotEmpty(message="is required")
+	@Pattern(regexp="[0-9]{9}", message="9 digits are required")
 	private String telephoneNumber;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotEmpty(message = "is required")
+	@Pattern(regexp="[a-zA-Z]+", message="City must contain only letters")
 	private String city;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotEmpty(message = "is required")
+	@Pattern(regexp="[a-zA-Z]+", message="Street must contain only letters")
 	private String street;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotEmpty(message = "is required")
+	@Pattern(regexp="[0-9]{2}-[0-9]{3}", message="Postal code must be in XX-XXX format")
 	private String postalCode;
 
 	

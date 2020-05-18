@@ -33,16 +33,13 @@ public class AdminController {
 	public String manageAdvert(
 			@RequestParam("id") int id,
 			@RequestParam("accepted") Boolean accepted) {
-		Advert advert = advertService.getAdvertById(id);
-		System.out.println("ADVERRRRRRRRRRRRRRRRRRRRT: " + advert);
 		
+		Advert advert = advertService.getAdvertById(id);
 		
 		if(accepted) {
 			advertService.makeAdvertActive(advert);
-			System.out.println("zzzzzzzz");
 		}else {
 			advertService.deleteAdvert(advert);
-			System.out.println("bbbbbb");
 		}
 		return "redirect:/admin";
 	}
