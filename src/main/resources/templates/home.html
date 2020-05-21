@@ -12,9 +12,9 @@
   </head>
   <body>
   <div class="bg-info">
-    <div th:replace="fragments :: navbar"> </div>
+    <div th:replace="fragments :: navbar"></div>
     
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height:500px;">
 	<div class="row justify-content-around">
 	<div class="card border-info my-5 mx-3" th:href="@{/advert(id=${advert.id})}" style="width: 18rem;" th:each="advert: ${adverts}" >
 	  <a th:href="@{/advert(id=${advert.id})}" >

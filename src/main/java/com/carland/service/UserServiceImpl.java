@@ -25,10 +25,10 @@ import com.carland.user.CrmUser;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	public UserDAO userDAO;
+	private UserDAO userDAO;
 	
 	@Autowired
-	public RoleDao roleDao;
+	private RoleDao roleDao;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;

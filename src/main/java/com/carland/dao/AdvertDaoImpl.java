@@ -1,8 +1,10 @@
 package com.carland.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -32,8 +34,9 @@ public class AdvertDaoImpl implements AdvertDao {
 	public List<Advert> getActiveAdverts() {
 		Session session = entityManager.unwrap(Session.class);
 		
-		Query<Advert> theQuery = session.createQuery("from Advert where state=:state", Advert.class);
+		Query<Advert> theQuery = session.createQuery("from Advert where state=:state and expiration_date>=:date" , Advert.class);
 		theQuery.setParameter("state", "ACTIVE");
+		theQuery.setParameter("date", LocalDate.now());
 		
 		return theQuery.getResultList();
 		
@@ -63,8 +66,17 @@ public class AdvertDaoImpl implements AdvertDao {
 		
 		Query<Advert> theQuery = session.createQuery("from Advert where state=:state",Advert.class);
 		theQuery.setParameter("state", "PENDING");
+		theQuery.setMaxResults(1);
 		
-		return theQuery.getResultList().get(0);
+		Advert advert;
+		
+		try{
+			advert = theQuery.getSingleResult();
+		}catch(NoResultException e) {
+			advert = null;
+		}
+		
+		return advert;
 	}
 
 }

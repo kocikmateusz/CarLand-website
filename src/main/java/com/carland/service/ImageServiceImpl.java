@@ -15,11 +15,6 @@ public class ImageServiceImpl implements ImageService {
 	private ImageDao imageDao;
 
 	@Override
-	public void save(Image image) {
-		imageDao.save(image);
-	}
-
-	@Override
 	public void save(MultipartFile[] files, Advert advert) {
 		for(MultipartFile file : files) {
 			String name = file.getOriginalFilename();

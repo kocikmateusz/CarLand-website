@@ -31,17 +31,20 @@ public class AdvertServiceImpl implements AdvertService {
 		User theUser = (User)session.getAttribute("user");
 		
 		advert.setUser(theUser);
-		
-		if(theUser.hasRole("ADMIN")) {
-			advert.setState("ACTIVE");
-		}else {
-			advert.setState("PENDING");
-		}
+		setAdvertStateBasedOnUserRole(advert);
 		
 		advertDao.saveAdvert(advert);
 		
 		imageService.save(files, advert);
 
+	}
+	
+	private void setAdvertStateBasedOnUserRole(Advert advert) {
+		if(advert.getUser().hasRole("ADMIN")) {
+			 makeAdvertActive(advert);
+		}else {
+			advert.setState("PENDING");
+		}
 	}
 
 

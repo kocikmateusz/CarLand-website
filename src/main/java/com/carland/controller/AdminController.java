@@ -23,6 +23,10 @@ public class AdminController {
 		
 		Advert advert = advertService.getOnePendingAdvert();
 		
+		if(advert == null) {
+			return "redirect:/";
+		}
+		
 		theModel.addAttribute("user", advert.getUser());
 		theModel.addAttribute("advert",advert);
 		

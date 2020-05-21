@@ -175,7 +175,7 @@ INSERT INTO `model` VALUES
 ('Boxter','Porsche');
 
 INSERT INTO `advert` values
-(1,1,'Fastest car you ever seen','Convertible','Porsche','Cayenne',1231,1999,11,'Diesel','a','2020-05-23','PENDING'),
+(1,1,'Fastest car you ever seen','Convertible','Porsche','Cayenne',1231,1999,11,'Diesel','a','2020-05-20','ACTIVE'),
 (2,1,'My second car','Coupe','Mercedes-Benz','CL',2500,1999,1999,'Electric','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate quam in leo imperdiet tincidunt non non risus. Mauris','2020-05-25','PENDING'),
 (3,1,'Super car','Coupe','Mercedes-Benz','GLS',1231321,2000,12312321,'Diesel','dsadsadsadsa','2020-05-26','PENDING'),
 (5,1,'My wifes car','Convertible','Porsche','911',12121,2001,1222,'Diesel','asssssssssss','2020-05-26','PENDING'),
@@ -185,9 +185,8 @@ INSERT INTO `image` values
 (1,1,'1.jpg'),
 (2,1,'2.jpg'),
 (3,2,'3.jpg'),
-(4,2,'4.jpg'),
+(4,6,'4.jpg'),
 (5,3,'5.jpg'),
-(6,5,'6.jpg'),
-(7,6,'7.jpg');
+(6,5,'6.jpg');
 
 

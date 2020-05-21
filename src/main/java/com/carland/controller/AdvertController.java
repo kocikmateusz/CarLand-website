@@ -51,25 +51,28 @@ public class AdvertController {
 			return "redirect:/";
 		}
 		
-		List<String> types = getNamesFromDB("type");
-		List<String> makes = getNamesFromDB("make");
-		
-		theModel.addAttribute("types",types);
-		theModel.addAttribute("makes",makes);
+		getMakesAndTypesAndAddToModel(theModel);
 		
 		Advert advert = new Advert();
 		theModel.addAttribute("advert",advert);
 		
 		return "sellmycar";
 	}
+
+	
 	
 	@PostMapping("/sellmycar")
 	public String saveAdvert(
 			@Valid @ModelAttribute("advert") Advert advert,
-			@RequestParam("file") MultipartFile[] files,
 			BindingResult theBindingResult, 
 			HttpServletRequest request,
-			Model theModel) {
+			Model theModel,
+			@RequestParam("file") MultipartFile[] files) {
+		
+		if(theBindingResult.hasErrors()) {
+			return "sellmycar";
+		}
+		
 		advertService.saveAdvert(advert, request,files);
 		
 		storageService.store(files);
@@ -82,17 +85,13 @@ public class AdvertController {
 	public String showEditAdvert(@RequestParam("id") int id, Model theModel){
 		Advert editedAdvert = advertService.getAdvertById(id);
 		
-		List<String> types = getNamesFromDB("type");
-		List<String> makes = getNamesFromDB("make");
-		List<String> models = getModels(editedAdvert.getMake());
-		
-		theModel.addAttribute("types",types);
-		theModel.addAttribute("makes",makes);
-		theModel.addAttribute("models",models);
+		getMakesAndTypesAndAddToModel(theModel);
+		getModelsAndAddToModel(theModel, editedAdvert);
 		theModel.addAttribute("editedAdvert", editedAdvert);
 		theModel.addAttribute("advert",editedAdvert);
 		return "editAdvert";
 	}
+
 	
 	@PostMapping("/edit")
 	public String editAdvert(
@@ -110,6 +109,20 @@ public class AdvertController {
 		storageService.store(files);
 		
 		return "redirect:/profile";
+	}
+	
+	private void getMakesAndTypesAndAddToModel(Model theModel) {
+		List<String> types = getNamesFromDB("type");
+		List<String> makes = getNamesFromDB("make");
+		
+		theModel.addAttribute("types",types);
+		theModel.addAttribute("makes",makes);
+	}
+	
+	private void getModelsAndAddToModel(Model theModel, Advert editedAdvert) {
+		List<String> models = getModels(editedAdvert.getMake());
+		
+		theModel.addAttribute("models",models);
 	}
 	
 	private Boolean checkIfUserHas10Adverts() {

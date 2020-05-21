@@ -17,7 +17,9 @@
     
    	<div class="container mb-5">
 	   	<div class="row">
-	    	<a th:href="@{/admin/decision(id=${advert.id},accepted=false)}" class="btn btn-danger" style="height:200px;width:50%">Delete</a>
+	    	<a role="button" th:href="@{/admin/decision(id=${advert.id},accepted=false)}" class="btn btn-danger text-center" style="height:200px;width:50%;">
+	    		<span>Delete</span>
+	    	</a>
 	    	<a th:href="@{/admin/decision(id=${advert.id},accepted=true)}" class="btn btn-success" style="height:200px;width:50%">Accept</a>
 	    </div>
    	</div>

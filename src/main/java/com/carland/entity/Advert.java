@@ -13,7 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="advert")
@@ -28,29 +35,42 @@ public class Advert {
 	@JoinColumn(name="user",nullable=false)
 	private User user;
 	
-	@NotNull(message="title is required")
+	
 	@Column(name="title")
+	@NotEmpty(message="title is required")
+	@Size(max=32, message="title ")
 	private String title;
 	
 	@Column(name="type")
+	@Pattern(regexp="[^none]", message="type is required")
 	private String type;
 	
 	@Column(name="make")
+	@Pattern(regexp="[^none]", message="make is required")
 	private String make;
 	
 	@Column(name="model")
+	@Pattern(regexp="[^none]", message="model is required")
 	private String model;
 	
 	@Column(name="price")
-	private int price;
+	@NotNull(message="price is required")
+	//@Pattern(regexp="[0-9]+", message="invalid number")
+	private Integer price;
 	
 	@Column(name="year")
-	private short year;
+	@NotNull(message="year is required")
+	@Min(value=1900, message="year must be greater than 1900")
+	@Max(value=2020, message="year must be lower than 2020")
+	private Integer year;
 	
 	@Column(name="mileage")
-	private int mileage;
+	@NotNull(message="year is required")
+	@PositiveOrZero(message="mileage must be positive")
+	private Integer mileage;
 	
 	@Column(name="fuel_type")
+	@Pattern(regexp="[^none]", message="make is required")
 	private String fuelType;
 	
 	@Column(name="description")
@@ -69,7 +89,7 @@ public class Advert {
 		
 	}
 
-	public Advert(User user, String title, String type, String make, String model, int price, short year,
+	public Advert(User user, String title, String type, String make, String model, int price, int year,
 			int mileage, String fuelType, String description, LocalDate expirationDate, String state) {
 		this.user = user;
 		this.title = title;
@@ -85,7 +105,7 @@ public class Advert {
 		this.state = state;
 	}
 	
-	public Advert(int id, User user, String title, String type, String make, String model, int price, short year,
+	public Advert(int id, User user, String title, String type, String make, String model, int price, int year,
 			int mileage, String fuelType, String description, LocalDate expirationDate, String state, Collection<Image> images) {
 		this.id = id;
 		this.user = user;
@@ -159,11 +179,11 @@ public class Advert {
 		this.price = price;
 	}
 
-	public short getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(short year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 
